@@ -56,7 +56,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
       {/* Navigation */}
-      <nav className="flex items-center justify-between p-3 md:p-6 bg-slate-900/50 backdrop-blur-sm border-b border-slate-700">
+      <nav className="flex items-center justify-between p-3 fixed left-0 right-0 top-0 z-50 md:p-6 bg-slate-900/50 backdrop-blur-sm border-b border-slate-700">
         <div className="flex items-center space-x-3 md:space-x-8">
           <Link to="/" className="flex items-center space-x-2">
             <Globe className="h-8 w-8 text-emerald-400" />
