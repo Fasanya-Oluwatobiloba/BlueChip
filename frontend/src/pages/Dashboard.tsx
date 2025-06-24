@@ -110,11 +110,12 @@ const Dashboard = () => {
               <div className="md:hidden">
                 <SidebarTrigger className="text-white">
                   <svg
-                    width="16"
-                    height="16"
+                    width="26"
+                    height="26"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
+                    className="-mb-2"
                   >
                     <path
                       d="M3 12h18M3 6h18M3 18h18"
