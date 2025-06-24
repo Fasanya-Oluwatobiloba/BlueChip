@@ -1,12 +1,38 @@
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Badge } from "../ui/badge";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 import { UserPlus, Edit } from "lucide-react";
 
 interface Admin {
@@ -28,7 +54,7 @@ export function AdminManagement({ admins, setAdmins }: AdminManagementProps) {
     name: "",
     email: "",
     password: "",
-    role: "Admin"
+    role: "Admin",
   });
 
   const handleCreateAdmin = () => {
@@ -39,7 +65,7 @@ export function AdminManagement({ admins, setAdmins }: AdminManagementProps) {
         email: newAdmin.email,
         role: newAdmin.role,
         lastLogin: "Never",
-        status: "active"
+        status: "active",
       };
       setAdmins([...admins, admin]);
       setNewAdmin({ name: "", email: "", password: "", role: "Admin" });
@@ -74,36 +100,47 @@ export function AdminManagement({ admins, setAdmins }: AdminManagementProps) {
               <div className="space-y-4">
                 <div>
                   <Label className="text-white">Full Name</Label>
-                  <Input 
+                  <Input
                     value={newAdmin.name}
-                    onChange={(e: { target: { value: any; }; }) => setNewAdmin({...newAdmin, name: e.target.value})}
-                    className="bg-slate-700 border-slate-600 text-white" 
+                    onChange={(e: { target: { value: any } }) =>
+                      setNewAdmin({ ...newAdmin, name: e.target.value })
+                    }
+                    className="bg-slate-700 border-slate-600 text-white"
                     placeholder="Enter full name"
                   />
                 </div>
                 <div>
                   <Label className="text-white">Email</Label>
-                  <Input 
+                  <Input
                     type="email"
                     value={newAdmin.email}
-                    onChange={(e: { target: { value: any; }; }) => setNewAdmin({...newAdmin, email: e.target.value})}
-                    className="bg-slate-700 border-slate-600 text-white" 
+                    onChange={(e: { target: { value: any } }) =>
+                      setNewAdmin({ ...newAdmin, email: e.target.value })
+                    }
+                    className="bg-slate-700 border-slate-600 text-white"
                     placeholder="Enter email address"
                   />
                 </div>
                 <div>
                   <Label className="text-white">Password</Label>
-                  <Input 
+                  <Input
                     type="password"
                     value={newAdmin.password}
-                    onChange={(e: { target: { value: any; }; }) => setNewAdmin({...newAdmin, password: e.target.value})}
-                    className="bg-slate-700 border-slate-600 text-white" 
+                    onChange={(e: { target: { value: any } }) =>
+                      setNewAdmin({ ...newAdmin, password: e.target.value })
+                    }
+                    className="bg-slate-700 border-slate-600 text-white"
                     placeholder="Enter password"
                   />
                 </div>
                 <div>
                   <Label className="text-white">Role</Label>
-                  <Select value={newAdmin.role} onValueChange={(value: any) => setNewAdmin({...newAdmin, role: value})}>
+                  <Select
+                    value={newAdmin.role}
+                    onValueChange={(value: any) =>
+                      setNewAdmin({ ...newAdmin, role: value })
+                    }
+                  >
                     <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
                       <SelectValue />
                     </SelectTrigger>
@@ -113,7 +150,10 @@ export function AdminManagement({ admins, setAdmins }: AdminManagementProps) {
                     </SelectContent>
                   </Select>
                 </div>
-                <Button onClick={handleCreateAdmin} className="bg-emerald-600 hover:bg-emerald-700 text-white">
+                <Button
+                  onClick={handleCreateAdmin}
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                >
                   Create Admin
                 </Button>
               </div>
@@ -134,23 +174,40 @@ export function AdminManagement({ admins, setAdmins }: AdminManagementProps) {
           <TableBody>
             {admins.map((admin) => (
               <TableRow key={admin.id} className="border-slate-700">
-                <TableCell className="text-white font-semibold">{admin.name}</TableCell>
+                <TableCell className="text-white font-semibold">
+                  {admin.name}
+                </TableCell>
                 <TableCell className="text-white">{admin.email}</TableCell>
                 <TableCell className="text-white">{admin.role}</TableCell>
-                <TableCell className="text-slate-300">{admin.lastLogin}</TableCell>
+                <TableCell className="text-slate-300">
+                  {admin.lastLogin}
+                </TableCell>
                 <TableCell>
-                  <Badge variant={admin.status === "active" ? "default" : "destructive"} className={
-                    admin.status === "active" ? "bg-emerald-600" : "bg-red-600"
-                  }>
+                  <Badge
+                    variant={
+                      admin.status === "active" ? "default" : "destructive"
+                    }
+                    className={
+                      admin.status === "active" ? "bg-emerald-600" : ""
+                    }
+                  >
                     {admin.status}
                   </Badge>
                 </TableCell>
                 <TableCell>
                   <div className="flex space-x-2">
-                    <Button size="sm" variant="outline" className="border-slate-600 text-white hover:bg-slate-700">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="border-slate-600 text-white hover:bg-slate-700"
+                    >
                       <Edit className="h-3 w-3" />
                     </Button>
-                    <Button size="sm" variant="outline" className="border-red-600 text-red-400 hover:bg-red-600/20">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="border-red-600 text-red-400 hover:bg-red-600/20"
+                    >
                       Suspend
                     </Button>
                   </div>
