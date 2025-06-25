@@ -1,16 +1,17 @@
 let users = [
-  { username: "nora", password: "123456" }, // Example user for testing
+  { email: "nora@gmail.com", password: "123456" }, // example user
 ];
 
 export default function handler(req, res) {
   if (req.method === "POST") {
     const { username, password } = req.body;
 
-    // Replace this with your actual credentials
-    const validEmail = "nora@gmail.com";
-    const validPassword = "password123";
+    // Check for a matching user by email
+    const user = users.find(
+      (u) => u.email === username && u.password === password
+    );
 
-    if (username === validEmail && password === validPassword) {
+    if (user) {
       return res.status(200).json({ message: "Login successful" });
     } else {
       return res.status(401).json({ error: "Invalid credentials" });
