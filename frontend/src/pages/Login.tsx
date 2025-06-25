@@ -17,11 +17,32 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Login attempt:", { email, password });
-    // TODO: Implement actual login logic
-  };
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: email, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("✅ Login successful!");
+      // Redirect to dashboard
+      window.location.href = "/dashboard";
+    } else {
+      alert("❌ " + data.error);
+    }
+  } catch (error) {
+    alert("❌ Login failed");
+    console.error("Login error:", error);
+  }
+};
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-center justify-center p-4">
@@ -95,14 +116,12 @@ const Login = () => {
                 </Link>
               </div>
 
-              <Link to="/dashboard">
-                <Button
-                  type="submit"
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+              <Button
+                type="submit"
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
                 >
-                  Sign In
-                </Button>
-              </Link>
+                Sign In
+              </Button>
             </form>
 
             <div className="text-center">
