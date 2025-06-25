@@ -1,14 +1,13 @@
-let users = [
-  { email: "nora@gmail.com", password: "123456" }, // example user
+const users = [
+  { email: "nora@gmail.com", password: "123456" },
 ];
 
 export default function handler(req, res) {
   if (req.method === "POST") {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    // Check for a matching user by email
     const user = users.find(
-      (u) => u.email === username && u.password === password
+      (u) => u.email === email && u.password === password
     );
 
     if (user) {
