@@ -6,20 +6,16 @@ export default function handler(req, res) {
   if (req.method === "POST") {
     const { username, password } = req.body;
 
-    if (!username || !password) {
-      return res.status(400).json({ error: "All fields are required" });
-    }
+    // Replace this with your actual credentials
+    const validEmail = "nora@gmail.com";
+    const validPassword = "password123";
 
-    const user = users.find(
-      (u) => u.username === username && u.password === password
-    );
-
-    if (!user) {
+    if (username === validEmail && password === validPassword) {
+      return res.status(200).json({ message: "Login successful" });
+    } else {
       return res.status(401).json({ error: "Invalid credentials" });
     }
-
-    return res.status(200).json({ message: "Login successful!" });
   } else {
-    res.status(405).json({ error: "Only POST requests allowed" });
+    res.status(405).json({ error: "Method not allowed" });
   }
 }
