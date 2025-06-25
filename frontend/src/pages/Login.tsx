@@ -17,32 +17,32 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  // ✅ FIXED handleSubmit: now sending email & password
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  try {
-    const response = await fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: email, password }),
-    });
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }), // ✅ fixed this line
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      alert("✅ Login successful!");
-      // Redirect to dashboard
-      window.location.href = "/dashboard";
-    } else {
-      alert("❌ " + data.error);
+      if (response.ok) {
+        alert("✅ Login successful!");
+        window.location.href = "/dashboard";
+      } else {
+        alert("❌ " + data.error);
+      }
+    } catch (error) {
+      alert("❌ Login failed");
+      console.error("Login error:", error);
     }
-  } catch (error) {
-    alert("❌ Login failed");
-    console.error("Login error:", error);
-  }
-};
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-center justify-center p-4">
@@ -108,8 +108,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               </div>
 
               <div className="flex justify-between items-center">
-                <Link
-                  to="/forgot-password"
+                <Link to="/forgot-password"
                   className="text-sm text-emerald-400 hover:underline"
                 >
                   Forgot password?
@@ -119,7 +118,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               <Button
                 type="submit"
                 className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
-                >
+              >
                 Sign In
               </Button>
             </form>
